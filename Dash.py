@@ -79,12 +79,16 @@ def get_pie_chart(entered_site):
 def get_scattered_chart(entered_site,entered_payload):
     if entered_site == "All":
         spacex_df_filtered = spacex_df[spacex_df["Payload Mass (kg)"] <= entered_payload]
-        fig = go.Figure(data=go.Scatter(x=spacex_df_filtered['Payload Mass (kg)'], y = spacex_df_filtered['class'], mode='markers', marker=dict(color='red')))
+        fig = px.scatter(spacex_df_filtered, x='Payload Mass (kg)', y='class', color='Launch Site')
+        #fig = go.Figure(data=go.Scatter(x=spacex_df_filtered['Payload Mass (kg)'], y = spacex_df_filtered['class'], mode='markers', color=spacex_df_filtered['Launch Site']))
+        #fig.update_layout(title='Payload Mass (kg) vs  Class', xaxis_title='Payload Mass', yaxis_title='Class')
         return fig
     else:
         spacex_df_filtered = spacex_df[spacex_df["Launch Site"] == entered_site]
         spacex_df_filtered = spacex_df_filtered[spacex_df_filtered["Payload Mass (kg)"] <= entered_payload]
-        fig = go.Figure(data=go.Scatter(x=spacex_df_filtered['Payload Mass (kg)'], y = spacex_df_filtered['class'], mode='markers', marker=dict(color='red')))
+        fig = px.scatter(spacex_df_filtered, x='Payload Mass (kg)', y='class', color='Launch Site')
+        #fig = go.Figure(data=go.Scatter(x=spacex_df_filtered['Payload Mass (kg)'], y = spacex_df_filtered['class'], mode='markers', marker=dict(color=spacex_df_filtered['Launch Site'])))
+        #fig.update_layout(title='Payload Mass (kg) vs  Class', xaxis_title='Payload Mass', yaxis_title='Class')
         return fig
 
 # Run the app
